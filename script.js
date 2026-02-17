@@ -1,28 +1,34 @@
 // ── Custom Cursor ──────────────────────────────────
-const cursor = document.getElementById("cursor");
+if (window.matchMedia("(hover: none)").matches) {
+  document.getElementById("cursor").style.display = "none";
+} else {
+  const cursor = document.getElementById("cursor");
 
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
 
-document.addEventListener("mouseleave", () => {
-  cursor.style.opacity = "0";
-});
+  document.addEventListener("mouseleave", () => {
+    cursor.style.opacity = "0";
+  });
 
-document.addEventListener("mouseenter", () => {
-  cursor.style.opacity = "1";
-});
+  document.addEventListener("mouseenter", () => {
+    cursor.style.opacity = "1";
+  });
 
-// Expand cursor on any clickable element
-const clickables = document.querySelectorAll(
-  'a, button, .btn, [role="button"]',
-);
+  // Expand cursor on any clickable element
+  const clickables = document.querySelectorAll(
+    'a, button, .btn, [role="button"]',
+  );
 
-clickables.forEach((el) => {
-  el.addEventListener("mouseenter", () => cursor.classList.add("expanded"));
-  el.addEventListener("mouseleave", () => cursor.classList.remove("expanded"));
-});
+  clickables.forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("expanded"));
+    el.addEventListener("mouseleave", () =>
+      cursor.classList.remove("expanded"),
+    );
+  });
+}
 
 // ── Scroll Reveal ──────────────────────────────────
 const reveals = document.querySelectorAll(".reveal");

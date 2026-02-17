@@ -4,7 +4,7 @@
   --surface: #111111;
   --border: #1e1e1e;
   --text: #e8e8e8;
-  --muted: #555;
+  --muted: #bb;
   --accent: #d4f542; /* sharp lime green accent */
   --accent-dim: rgba(212, 245, 66, 0.08);
   --font-display: "Syne", sans-serif;
@@ -418,8 +418,14 @@ footer {
     gap: 1.5rem;
   }
 
+  #hero::before {
+    font-size: 30vw;
+    top: 30%;
+  }
+
   #hero {
-    padding: 0 1.5rem 4rem;
+    min-height: auto;
+    padding: 8rem 1.5rem 4rem;
   }
 
   section {
