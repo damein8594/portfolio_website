@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damien | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Nav -->
+    <nav>
+      <span class="nav-logo">D.</span>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header id="hero">
+      <div class="hero-inner">
+        <p class="hero-tag reveal">Software Design & Development</p>
+        <h1 class="reveal delay-1">Damien.</h1>
+        <p class="hero-sub reveal delay-2">
+          Aspiring software apprentice building things with code — currently a T
+          Level student with a focus on JavaScript, Python, and clean UI.
+        </p>
+        <a href="#projects" class="btn reveal delay-3">See my work ↓</a>
+      </div>
+      <div class="hero-line"></div>
+    </header>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-label reveal"><span>01</span> Projects</div>
+
+      <div class="project reveal delay-1">
+        <div class="project-header">
+          <h3>Dralix</h3>
+          <span class="project-tag">JS / HTML / CSS</span>
+        </div>
+        <p class="project-desc">
+          A browser-based Kanban board to create, organise, and track tasks
+          across workflow stages. Built with vanilla JavaScript with
+          drag-and-drop and connection to a backend API that I created.
+        </p>
+        <div class="project-meta">
+          <div class="project-features">
+            <span>Create / Edit / Delete tasks</span>
+            <span>Drag & drop columns</span>
+            <span>API access</span>
+          </div>
+          <a
+            href="https://github.com/damein8594/Dralix/tree/main/frontend"
+            target="_blank"
+            class="project-link"
+            >GitHub ↗</a
+          >
+        </div>
+      </div>
+
+      <div class="project reveal delay-2">
+<div class="project-header">
+  <h3>Dralix API</h3>
+  <span class="project-tag">Python / MySQL / REST</span>
+</div>
+<p class="project-desc">
+  A RESTful API built from scratch to power the Dralix kanban board. Handles
+  all task data through structured endpoints, with a MySQL database for
+  persistence and Python managing the backend logic.
+</p>
+<div class="project-meta">
+  <div class="project-features">
+    <span>REST endpoints</span>
+    <span>CRUD operations</span>
+    <span>MySQL persistence</span>
+  </div>
+  
+    href="https://github.com/damein8594/Dralix/tree/main/backend"
+    target="_blank"
+    class="project-link"
+    >GitHub ↗</a
+  >
+</div>
+
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-label reveal"><span>02</span> Skills</div>
+
+      <div class="skills-grid reveal delay-1">
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          <span>Python</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          <span>JavaScript</span>
+          <em class="skill-note">in progress</em>
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          <span>MySQL</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          <span>HTML & CSS</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          <span>Git / GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-label reveal"><span>03</span> Contact</div>
+
+      <div class="contact-block reveal delay-1">
+        <p class="contact-line">
+          <span class="contact-label">Email</span>
+          <a href="mailto:damienhiggins15@gmail.com"
+            >damienhiggins15@gmail.com</a
+          >
+        </p>
+        <p class="contact-line">
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/damein8594" target="_blank"
+            >github.com/damein8594</a
+          >
+        </p>
+        <p class="contact-line">
+          <span class="contact-label">LinkedIn</span>
+          <a
+            href="https://www.linkedin.com/in/damien-higgins-846051297"
+            target="_blank"
+            >linkedin.com/in/damien-higgins-846051297</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
