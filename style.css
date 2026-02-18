@@ -4,8 +4,8 @@
   --surface: #111111;
   --border: #1e1e1e;
   --text: #e8e8e8;
-  --muted: #bb;
-  --accent: #d4f542; /* sharp lime green accent */
+  --muted: #bbbbbb;
+  --accent: #c8e83f; /* sharp lime green accent */
   --accent-dim: rgba(212, 245, 66, 0.08);
   --font-display: "Syne", sans-serif;
   --font-mono: "DM Mono", monospace;
@@ -425,11 +425,16 @@ footer {
 
   #hero {
     min-height: auto;
-    padding: 8rem 1.5rem 4rem;
+    padding: 8rem 1.5rem 2rem;
   }
 
   section {
-    padding: 4rem 1.5rem;
+    padding: 1rem 1.5rem;
+    padding-bottom: 0;
+  }
+
+  .section-label {
+    margin-bottom: 1rem;
   }
 
   footer {
@@ -439,6 +444,10 @@ footer {
     text-align: center;
   }
 
+  .project {
+    padding: 0.75rem 0;
+  }
+
   .project-header {
     flex-direction: column;
   }
@@ -446,6 +455,15 @@ footer {
   .project-meta {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .project-features {
+    gap: 0.25rem;
+  }
+
+  .project-features span {
+    padding: 0.15rem 0.45rem;
+    font-size: 0.65rem;
   }
 
   .contact-line {
