@@ -11,6 +11,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   </head>
   <body>
     <div class="cursor" id="cursor"></div>
@@ -76,6 +81,13 @@
               alt="Dralix task card detail"
               class="project-screenshot-sm"
             />
+            <p class="project-desc project-desc-inner">
+              // The story point calculator uses a weighted average across four
+              effort categories — complexity, uncertainty, development time, and
+              testing — to suggest a point value from the Fibonacci sequence.
+              This removes guesswork from sprint planning and keeps estimates
+              consistent across the team.
+            </p>
             <img
               src="imgs/dralix_new_card.png"
               alt="Dralix new card with story point estimator"
@@ -109,6 +121,28 @@
           Handles all task data through structured endpoints, with a MySQL
           database for persistence and Python managing the backend logic.
         </p>
+
+        <div class="project-preview">
+          <div class="preview-bar">
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+            <span class="preview-url">api/routes.py</span>
+          </div>
+          <pre><code class="language-python">@app.route("/api/tasks", methods=["POST"])
+def create_task():
+    from models import Task
+    data = request.get_json()
+    task = Task(
+        title=data.get("title", "No title"),
+        status=data.get("status", "todo"),
+        description=data.get("description", ""),
+        storypoint=data.get("storyPoint", 1)
+    )
+    db.session.add(task)
+    db.session.commit()
+    return jsonify({"message": "Task created"}), 201</code></pre>
+        </div>
 
         <div class="project-meta">
           <div class="project-features">
@@ -153,8 +187,13 @@
       <div class="contact-block">
         <p class="contact-line">
           <span class="contact-label">Email</span>
-          <a href="mailto:damienhiggins15@gmail.com"
-            >damienhiggins15@gmail.com</a
+          <a
+            href="/cdn-cgi/l/email-protection#f397929e9a969d9b9a94949a9d80c2c6b3949e929a9fdd909c9e"
+            ><span
+              class="__cf_email__"
+              data-cfemail="a8ccc9c5c1cdc6c0c1cfcfc1c6db999de8cfc5c9c1c486cbc7c5"
+              >[email&#160;protected]</span
+            ></a
           >
         </p>
         <p class="contact-line">
@@ -173,11 +212,5 @@
         </p>
       </div>
     </section>
-
-    <footer>
-      <p>&copy; 2026 Damien Higgins</p>
-    </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>
