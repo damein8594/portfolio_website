@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -29,16 +29,19 @@
       </ul>
     </nav>
 
+    <!-- ── Hero ───────────────────────────── -->
     <header id="hero">
       <div class="hero-inner">
-        <p class="hero-tag">
-          T Level &mdash; Software Design &amp; Development
-        </p>
+        <p class="hero-tag">Software Development Student</p>
         <h1>Damien.</h1>
         <p class="hero-sub">
-          I build full-stack web apps with Python, JavaScript, and SQL.
-          Currently completing a T Level in Software Design &amp; Development
-          and looking for an apprenticeship where I can contribute from day one.
+          I work across backend and full-stack systems built with Python,
+          JavaScript, and SQL. Focused on building systems properly and
+          understanding how they work.
+        </p>
+        <p class="hero-edu">
+          T Level student in Software Design and Development &mdash; looking for
+          a software development apprenticeship.
         </p>
         <div class="hero-ctas">
           <a href="#projects" class="btn">See my work &#8595;</a>
@@ -47,20 +50,22 @@
       </div>
     </header>
 
+    <!-- ── Projects ───────────────────────── -->
     <section id="projects">
       <div class="section-label"><span>01</span> Projects</div>
 
+      <!-- Dralix Frontend -->
       <div class="project">
         <div class="project-header">
           <h3>Dralix</h3>
           <span class="project-tag">JS / HTML / CSS</span>
         </div>
         <p class="project-desc">
-          A full-stack kanban board for agile task management. Drag-and-drop
-          interface built with vanilla JavaScript and the HTML5 Drag API,
-          connected to a Python Flask REST API with MySQL persistence. Includes
-          story point estimation calculator and dual storage modes
-          (local/database).
+          Built to deepen my understanding of JavaScript and frontend
+          architecture without frameworks. Implements drag-and-drop with the
+          native HTML5 Drag API and connects to a Flask REST API with MySQL
+          persistence. Features a built-in story point estimator and support for
+          local or database storage.
         </p>
 
         <div class="project-preview">
@@ -70,10 +75,10 @@
             class="project-screenshot"
           />
           <p class="project-desc project-desc-inner">
-            The whole point of Dralix was to learn JavaScript and the DOM, so I
-            built the entire frontend from scratch without any libraries or
-            frameworks. The result is a lightweight, responsive kanban board
-            with intuitive drag-and-drop functionality.
+            Built the entire frontend from scratch without libraries or
+            frameworks to strengthen my understanding of JavaScript and the DOM.
+            The result is a lightweight, responsive kanban board with custom
+            state handling and native drag-and-drop.
           </p>
           <div class="project-screenshot-row">
             <img
@@ -82,11 +87,10 @@
               class="project-screenshot-sm"
             />
             <p class="project-desc project-desc-inner">
-              // The story point calculator uses a weighted average across four
-              effort categories — complexity, uncertainty, development time, and
-              testing — to suggest a point value from the Fibonacci sequence.
-              This removes guesswork from sprint planning and keeps estimates
-              consistent across the team.
+              The story point estimator applies a weighted calculation across
+              complexity, uncertainty, development time, and testing effort to
+              derive a Fibonacci-based estimate &mdash; keeping sprint planning
+              consistent and removing guesswork.
             </p>
             <img
               src="imgs/dralix_new_card.png"
@@ -98,9 +102,10 @@
 
         <div class="project-meta">
           <div class="project-features">
-            <span>Create / Edit / Delete tasks</span>
-            <span>Drag &amp; drop columns</span>
-            <span>API access</span>
+            <span>CRUD Operations</span>
+            <span>Native Drag &amp; Drop</span>
+            <span>REST API Integration</span>
+            <span>State Persistence</span>
           </div>
           <a
             href="https://github.com/damein8594/Dralix/tree/main/frontend"
@@ -111,15 +116,18 @@
         </div>
       </div>
 
+      <!-- Dralix API -->
       <div class="project">
         <div class="project-header">
           <h3>Dralix API</h3>
           <span class="project-tag">Python / MySQL / REST</span>
         </div>
         <p class="project-desc">
-          A RESTful API built from scratch to power the Dralix kanban board.
-          Handles all task data through structured endpoints, with a MySQL
-          database for persistence and Python managing the backend logic.
+          A RESTful API built to power the Dralix kanban board, handling task
+          management through structured endpoints. Implements database
+          persistence using MySQL with Python managing backend logic and request
+          handling. Designed to separate frontend interaction from server-side
+          data management.
         </p>
 
         <div class="project-preview">
@@ -144,11 +152,44 @@ def create_task():
     return jsonify({"message": "Task created"}), 201</code></pre>
         </div>
 
+        <p
+          class="project-desc project-desc-inner"
+          style="
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin: var(--space-sm) 0;
+          "
+        >
+          Built to deepen my understanding of API development, routing patterns,
+          and backend architecture through hands-on implementation.
+        </p>
+
+        <div class="project-preview">
+          <div class="preview-bar">
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+            <span class="preview-url">models.py</span>
+          </div>
+          <pre><code class="language-python">class Task(db.Model):
+    id          = db.Column(db.Integer, primary_key=True)
+    title       = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text)
+    status      = db.Column(db.String(50), default="todo")
+    storypoint  = db.Column(db.Integer, default=1)</code></pre>
+          <p class="project-desc project-desc-inner">
+            The Task model defines how data is structured and stored. It
+            enforces consistent formatting between the API and MySQL database,
+            acting as the core data layer for the application.
+          </p>
+        </div>
+
         <div class="project-meta">
           <div class="project-features">
-            <span>REST endpoints</span>
-            <span>CRUD operations</span>
-            <span>MySQL persistence</span>
+            <span>Flask REST API</span>
+            <span>CRUD Architecture</span>
+            <span>SQLAlchemy ORM</span>
+            <span>Database Persistence</span>
           </div>
           <a
             href="https://github.com/damein8594/Dralix/tree/main/backend"
@@ -160,6 +201,7 @@ def create_task():
       </div>
     </section>
 
+    <!-- ── Skills ─────────────────────────── -->
     <section id="skills">
       <div class="section-label"><span>02</span> Skills</div>
       <div class="skills-grid">
@@ -179,21 +221,20 @@ def create_task():
         <div class="skill-item">
           <span class="skill-dot"></span><span>Git / GitHub</span>
         </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span><span>Flask / REST APIs</span>
+        </div>
       </div>
     </section>
 
+    <!-- ── Contact ────────────────────────── -->
     <section id="contact">
       <div class="section-label"><span>03</span> Contact</div>
       <div class="contact-block">
         <p class="contact-line">
           <span class="contact-label">Email</span>
-          <a
-            href="/cdn-cgi/l/email-protection#f397929e9a969d9b9a94949a9d80c2c6b3949e929a9fdd909c9e"
-            ><span
-              class="__cf_email__"
-              data-cfemail="a8ccc9c5c1cdc6c0c1cfcfc1c6db999de8cfc5c9c1c486cbc7c5"
-              >[email&#160;protected]</span
-            ></a
+          <a href="mailto:damienhiggins15@gmail.com"
+            >damienhiggins15@gmail.com</a
           >
         </p>
         <p class="contact-line">
@@ -212,5 +253,14 @@ def create_task():
         </p>
       </div>
     </section>
+
+    <footer>
+      <p>&copy; 2026 Damien Higgins</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>
