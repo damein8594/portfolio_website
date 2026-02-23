@@ -488,6 +488,28 @@ pre code.hljs {
   background: var(--surface);
 }
 
+.project-thumb {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-sm);
+}
+
+.project-links {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.project-link-primary {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
 .project-link {
   text-decoration: none;
   color: var(--text);

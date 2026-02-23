@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damien | Dralix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+      /* ── Project page specific ── */
+      .project-hero {
+        min-height: 45vh;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 var(--space-lg);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--border-subtle) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+        background-size: 60px 60px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .project-hero::after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: -5%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+
+      .project-hero-inner {
+        max-width: var(--max-width);
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 8rem 0 3rem;
+      }
+
+      .project-hero-inner h1 {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        margin-bottom: var(--space-sm);
+      }
+
+      .project-hero-meta {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: var(--space-sm);
+      }
+
+      .project-hero-sub {
+        color: var(--muted);
+        font-size: 20px;
+        max-width: 580px;
+        line-height: 1.7;
+        margin-bottom: var(--space-md);
+      }
+
+      .project-hero-links {
+        display: flex;
+        gap: var(--space-sm);
+      }
+
+      /* Content sections */
+      .project-page-section {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--space-lg);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .project-page-section h2 {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: var(--space-md);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .project-page-section h2 span {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--accent);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+      }
+
+      .project-page-section p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.85;
+        max-width: 640px;
+        margin-bottom: var(--space-sm);
+      }
+
+      .project-page-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Full width screenshot */
+      .project-full-screenshot {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-md);
+        object-fit: cover;
+        object-position: top;
+      }
+
+      /* Screenshot pair */
+      .screenshot-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+      }
+
+      .screenshot-pair img {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        object-fit: contain;
+        background: #0d0d0d;
+      }
+
+      .screenshot-caption {
+        font-size: 13px !important;
+        color: var(--muted-2) !important;
+        text-align: center;
+        margin-top: -0.5rem !important;
+        margin-bottom: var(--space-sm) !important;
+      }
+
+      /* Decision cards */
+      .decision-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      .decision-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+
+      .decision-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.8rem var(--space-sm);
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .decision-card-header h4 {
+        font-size: 17px;
+        font-weight: 600;
+      }
+
+      .decision-number {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--accent);
+        background: var(--accent-dim);
+        border: 1px solid rgba(200, 232, 63, 0.12);
+        padding: 0.15rem 0.5rem;
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+      }
+
+      .decision-card p {
+        padding: var(--space-sm);
+        margin: 0 !important;
+        max-width: 100% !important;
+        font-size: 16px !important;
+        color: var(--muted) !important;
+      }
+
+      /* What I learned list */
+      .learned-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .learned-item {
+        display: flex;
+        gap: var(--space-sm);
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--border-subtle);
+        align-items: flex-start;
+      }
+
+      .learned-item:last-child {
+        border-bottom: none;
+      }
+
+      .learned-item::before {
+        content: "→";
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 14px;
+        flex-shrink: 0;
+        margin-top: 0.3rem;
+      }
+
+      .learned-item p {
+        font-size: 17px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+
+      @media (max-width: 900px) {
+        .project-hero {
+          padding: 0 var(--space-md);
+        }
+        .project-page-section {
+          padding: var(--space-md);
+        }
+        .screenshot-pair {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+
+    <nav>
+      <span class="nav-logo">D.</span>
+      <ul>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ── Hero ── -->
+    <header class="project-hero">
+      <div class="project-hero-inner">
+        <p class="hero-tag">Project</p>
+        <h1>Dralix.</h1>
+        <div class="project-hero-meta">
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">HTML &amp; CSS</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">MySQL</span>
+        </div>
+        <p class="project-hero-sub">
+          A full-stack kanban board built to learn JavaScript and the DOM
+          properly — no frameworks, no shortcuts.
+        </p>
+        <div class="project-hero-links">
+          <a
+            href="https://github.com/damein8594/Dralix/tree/main/frontend"
+            target="_blank"
+            class="btn"
+            >Frontend &#8599;</a
+          >
+          <a
+            href="https://github.com/damein8594/Dralix/tree/main/backend"
+            target="_blank"
+            class="btn-ghost"
+            >API &#8599;</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Overview ── -->
+    <section class="project-page-section">
+      <h2><span>01</span> Overview</h2>
+      <img
+        src="imgs/dralix_overview.png"
+        alt="Dralix kanban board"
+        class="project-full-screenshot"
+      />
+      <p>
+        Dralix is a kanban board for agile task management. It lets you create,
+        edit, and delete tasks across columns, drag cards between columns,
+        estimate story points, and switch between local storage and a database
+        backend.
+      </p>
+      <p>
+        The project started as a way to force myself to learn JavaScript
+        properly. I'd been learning Python and felt comfortable with the
+        backend, but I hadn't built anything serious with JS. Rather than
+        following a tutorial, I picked a real project with real features and
+        built it until it worked.
+      </p>
+    </section>
+
+    <!-- ── Why I built it ── -->
+    <section class="project-page-section">
+      <h2><span>02</span> Why I built it this way</h2>
+      <div class="decision-list">
+        <div class="decision-card">
+          <div class="decision-card-header">
+            <span class="decision-number">01</span>
+            <h4>No frameworks — vanilla JavaScript only</h4>
+          </div>
+          <p>
+            I deliberately avoided React or any other framework. The point was
+            to understand how the DOM actually works — event listeners, state
+            management, re-rendering — before abstracting any of it away. If you
+            can build it in vanilla JS, you understand what frameworks are
+            actually doing for you.
+          </p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-card-header">
+            <span class="decision-number">02</span>
+            <h4>Native HTML5 Drag API instead of a library</h4>
+          </div>
+          <p>
+            Same reasoning — I wanted to understand what drag-and-drop actually
+            involves at the browser level. Using the native Drag API meant
+            working through dragstart, dragover, drop events and understanding
+            how data transfer works between elements.
+          </p>
+        </div>
+        <div class="decision-card">
+          <div class="decision-card-header">
+            <span class="decision-number">03</span>
+            <h4>Dual storage modes — local and database</h4>
+          </div>
+          <p>
+            I built support for both localStorage and a MySQL backend so I could
+            understand how frontend state management differs from server-side
+            persistence. Switching between them also gave me a reason to design
+            the frontend code in a way that wasn't tightly coupled to one
+            storage method.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Story point estimator ── -->
+    <section class="project-page-section">
+      <h2><span>03</span> Story point estimator</h2>
+      <div class="screenshot-pair">
+        <img src="imgs/dralix_fullCard.png" alt="Dralix task card" />
+        <img
+          src="imgs/dralix_new_card.png"
+          alt="Dralix story point estimator"
+        />
+      </div>
+      <p>
+        One feature I'm particularly proud of is the story point estimator. When
+        creating a task, you can estimate its complexity across four dimensions:
+        complexity, uncertainty, development time, and testing effort. The
+        estimator applies a weighted calculation across these inputs and
+        suggests a value from the Fibonacci sequence.
+      </p>
+      <p>
+        The reason for Fibonacci is the same as in real agile teams — the
+        increasing gaps between numbers reflect that estimating large tasks is
+        inherently less precise. The goal is to remove subjective guesswork and
+        keep estimates consistent across the board.
+      </p>
+    </section>
+
+    <!-- ── The API ── -->
+    <section class="project-page-section">
+      <h2><span>04</span> The backend API</h2>
+      <div class="project-preview">
+        <div class="preview-bar">
+          <span class="preview-dot"></span>
+          <span class="preview-dot"></span>
+          <span class="preview-dot"></span>
+          <span class="preview-url">api/routes.py</span>
+        </div>
+        <pre><code class="language-python">@app.route("/api/tasks", methods=["POST"])
+def create_task():
+    from models import Task
+    data = request.get_json()
+    task = Task(
+        title=data.get("title", "No title"),
+        status=data.get("status", "todo"),
+        description=data.get("description", ""),
+        storypoint=data.get("storyPoint", 1)
+    )
+    db.session.add(task)
+    db.session.commit()
+    return jsonify({"message": "Task created"}), 201</code></pre>
+      </div>
+      <p>
+        The REST API is built with Python and Flask. It exposes endpoints for
+        full CRUD operations on tasks, with SQLAlchemy handling the ORM layer
+        and MySQL storing the data. The API is intentionally separate from the
+        frontend — the kanban board talks to it over HTTP and can fall back to
+        localStorage if the API isn't running.
+      </p>
+      <div class="project-preview" style="margin-top: var(--space-sm)">
+        <div class="preview-bar">
+          <span class="preview-dot"></span>
+          <span class="preview-dot"></span>
+          <span class="preview-dot"></span>
+          <span class="preview-url">models.py</span>
+        </div>
+        <pre><code class="language-python">class Task(db.Model):
+    id          = db.Column(db.Integer, primary_key=True)
+    title       = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text)
+    status      = db.Column(db.String(50), default="todo")
+    storypoint  = db.Column(db.Integer, default=1)</code></pre>
+      </div>
+      <p>
+        The Task model defines how data is structured and stored. It enforces
+        consistent formatting between the API and the MySQL database, acting as
+        the core data layer for the whole application.
+      </p>
+    </section>
+
+    <!-- ── What I learned ── -->
+    <section class="project-page-section">
+      <h2><span>05</span> What I learned</h2>
+      <div class="learned-list">
+        <div class="learned-item">
+          <p>
+            How JavaScript event-driven programming actually works — attaching
+            listeners, bubbling, and managing state without a framework.
+          </p>
+        </div>
+        <div class="learned-item">
+          <p>
+            How the HTML5 Drag API works under the hood and why libraries like
+            SortableJS exist to abstract the rough edges.
+          </p>
+        </div>
+        <div class="learned-item">
+          <p>
+            How to design a REST API that cleanly separates concerns between
+            frontend and backend.
+          </p>
+        </div>
+        <div class="learned-item">
+          <p>
+            How SQLAlchemy models map to database tables and why an ORM layer is
+            useful for keeping data consistent.
+          </p>
+        </div>
+        <div class="learned-item">
+          <p>
+            How to think about dual storage modes — designing code that isn't
+            tightly coupled to one data source.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── What's next ── -->
+    <section class="project-page-section">
+      <h2><span>06</span> What I'd do differently / what's next</h2>
+      <p>
+        If I were to build Dralix again, I'd probably add user accounts and
+        real-time collaboration features. It would be interesting to implement
+        WebSockets for live updates across clients and see how that changes the
+        architecture. I'd also consider adding more advanced task features like
+        subtasks, attachments, and integrations with calendar apps. I would also
+        use a frontend framework like React or Vue to manage the UI more
+        efficiently. The vanilla JS implementation was a great learning
+        experience, but it would be more maintainable and scalable with a
+        framework.
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Damien Higgins</p>
+      <a
+        href="index.html"
+        style="
+          color: var(--muted-2);
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.2s ease;
+        "
+        onmouseover="this.style.color = 'var(--accent)'"
+        onmouseout="this.style.color = 'var(--muted-2)'"
+        >&#8592; Back to portfolio</a
+      >
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

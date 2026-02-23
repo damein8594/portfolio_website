@@ -24,7 +24,7 @@
       <span class="nav-logo">D.</span>
       <ul>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -54,175 +54,40 @@
     <section id="projects">
       <div class="section-label"><span>01</span> Projects</div>
 
-      <!-- Dralix Frontend -->
+      <!-- Dralix -->
       <div class="project">
         <div class="project-header">
           <h3>Dralix</h3>
-          <span class="project-tag">JS / HTML / CSS</span>
+          <span class="project-tag">JS / HTML / CSS / Python / MySQL</span>
         </div>
+        <img
+          src="imgs/dralix_overview.png"
+          alt="Dralix kanban board overview"
+          class="project-screenshot project-thumb"
+        />
         <p class="project-desc">
-          Built to deepen my understanding of JavaScript and frontend
-          architecture without frameworks. Implements drag-and-drop with the
-          native HTML5 Drag API and connects to a Flask REST API with MySQL
-          persistence. Features a built-in story point estimator and support for
-          local or database storage.
+          A full-stack kanban board with drag-and-drop task management, a
+          built-in story point estimator, and a Python Flask REST API backend
+          with MySQL persistence.
         </p>
-
-        <div class="project-preview">
-          <img
-            src="imgs/dralix_overview.png"
-            alt="Dralix kanban board overview"
-            class="project-screenshot"
-          />
-          <p class="project-desc project-desc-inner">
-            Built the entire frontend from scratch without libraries or
-            frameworks to strengthen my understanding of JavaScript and the DOM.
-            The result is a lightweight, responsive kanban board with custom
-            state handling and native drag-and-drop.
-          </p>
-          <div class="project-screenshot-row">
-            <img
-              src="imgs/dralix_fullCard.png"
-              alt="Dralix task card detail"
-              class="project-screenshot-sm"
-            />
-            <p class="project-desc project-desc-inner">
-              The story point estimator applies a weighted calculation across
-              complexity, uncertainty, development time, and testing effort to
-              derive a Fibonacci-based estimate &mdash; keeping sprint planning
-              consistent and removing guesswork.
-            </p>
-            <img
-              src="imgs/dralix_new_card.png"
-              alt="Dralix new card with story point estimator"
-              class="project-screenshot-sm"
-            />
-          </div>
-        </div>
-
         <div class="project-meta">
           <div class="project-features">
             <span>CRUD Operations</span>
             <span>Native Drag &amp; Drop</span>
-            <span>REST API Integration</span>
+            <span>REST API</span>
             <span>State Persistence</span>
           </div>
-          <a
-            href="https://github.com/damein8594/Dralix/tree/main/frontend"
-            target="_blank"
-            class="project-link"
-            >GitHub &#8599;</a
-          >
-        </div>
-      </div>
-
-      <!-- Dralix API -->
-      <div class="project">
-        <div class="project-header">
-          <h3>Dralix API</h3>
-          <span class="project-tag">Python / MySQL / REST</span>
-        </div>
-        <p class="project-desc">
-          A RESTful API built to power the Dralix kanban board, handling task
-          management through structured endpoints. Implements database
-          persistence using MySQL with Python managing backend logic and request
-          handling. Designed to separate frontend interaction from server-side
-          data management.
-        </p>
-
-        <div class="project-preview">
-          <div class="preview-bar">
-            <span class="preview-dot"></span>
-            <span class="preview-dot"></span>
-            <span class="preview-dot"></span>
-            <span class="preview-url">api/routes.py</span>
+          <div class="project-links">
+            <a href="dralix.html" class="project-link project-link-primary"
+              >Read more &#8594;</a
+            >
+            <a
+              href="https://github.com/damein8594/Dralix"
+              target="_blank"
+              class="project-link"
+              >GitHub &#8599;</a
+            >
           </div>
-          <pre><code class="language-python">@app.route("/api/tasks", methods=["POST"])
-def create_task():
-    from models import Task
-    data = request.get_json()
-    task = Task(
-        title=data.get("title", "No title"),
-        status=data.get("status", "todo"),
-        description=data.get("description", ""),
-        storypoint=data.get("storyPoint", 1)
-    )
-    db.session.add(task)
-    db.session.commit()
-    return jsonify({"message": "Task created"}), 201</code></pre>
-        </div>
-
-        <p
-          class="project-desc project-desc-inner"
-          style="
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            margin: var(--space-sm) 0;
-          "
-        >
-          Built to deepen my understanding of API development, routing patterns,
-          and backend architecture through hands-on implementation.
-        </p>
-
-        <div class="project-preview">
-          <div class="preview-bar">
-            <span class="preview-dot"></span>
-            <span class="preview-dot"></span>
-            <span class="preview-dot"></span>
-            <span class="preview-url">models.py</span>
-          </div>
-          <pre><code class="language-python">class Task(db.Model):
-    id          = db.Column(db.Integer, primary_key=True)
-    title       = db.Column(db.String(150), nullable=False)
-    description = db.Column(db.Text)
-    status      = db.Column(db.String(50), default="todo")
-    storypoint  = db.Column(db.Integer, default=1)</code></pre>
-          <p class="project-desc project-desc-inner">
-            The Task model defines how data is structured and stored. It
-            enforces consistent formatting between the API and MySQL database,
-            acting as the core data layer for the application.
-          </p>
-        </div>
-
-        <div class="project-meta">
-          <div class="project-features">
-            <span>Flask REST API</span>
-            <span>CRUD Architecture</span>
-            <span>SQLAlchemy ORM</span>
-            <span>Database Persistence</span>
-          </div>
-          <a
-            href="https://github.com/damein8594/Dralix/tree/main/backend"
-            target="_blank"
-            class="project-link"
-            >GitHub &#8599;</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Skills ─────────────────────────── -->
-    <section id="skills">
-      <div class="section-label"><span>02</span> Skills</div>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>Python</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>JavaScript</span
-          ><em class="skill-note">in progress</em>
-        </div>
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>MySQL</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>HTML &amp; CSS</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>Git / GitHub</span>
-        </div>
-        <div class="skill-item">
-          <span class="skill-dot"></span><span>Flask / REST APIs</span>
         </div>
       </div>
     </section>
@@ -254,13 +119,6 @@ def create_task():
       </div>
     </section>
 
-    <footer>
-      <p>&copy; 2026 Damien Higgins</p>
-    </footer>
-
-    <script src="script.js"></script>
-    <script>
-      hljs.highlightAll();
-    </script>
+    <footer></footer>
   </body>
 </html>

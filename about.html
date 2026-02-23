@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damien | About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── About page specific styles ── */
+      .about-hero {
+        min-height: 40vh;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 var(--space-lg);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--border-subtle) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+        background-size: 60px 60px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .about-hero::after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: -5%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+
+      .about-hero-inner {
+        max-width: var(--max-width);
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 8rem 0 3rem;
+      }
+
+      .about-hero-inner .hero-tag {
+        margin-bottom: var(--space-sm);
+      }
+
+      .about-hero-inner h1 {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        margin-bottom: var(--space-sm);
+      }
+
+      .about-intro {
+        color: var(--muted);
+        font-size: 20px;
+        line-height: 1.8;
+        max-width: 600px;
+      }
+
+      /* Bio block */
+      .bio-block {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      .bio-block p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.85;
+        max-width: 640px;
+      }
+
+      /* Education card */
+      .education-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+
+      .education-card-header {
+        padding: var(--space-sm) var(--space-md);
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .education-card-header h3 {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .education-badge {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        background: var(--accent-dim);
+        padding: 0.2rem 0.65rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(200, 232, 63, 0.12);
+      }
+
+      .education-card-body {
+        padding: var(--space-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      .education-row {
+        display: flex;
+        gap: 1.5rem;
+        align-items: baseline;
+      }
+
+      .education-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted-2);
+        min-width: 100px;
+        flex-shrink: 0;
+      }
+
+      .education-value {
+        font-size: 17px;
+        color: var(--text);
+      }
+
+      .education-desc {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.8;
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--border-subtle);
+      }
+
+      /* Skills grid */
+      .skills-about-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+
+      .skill-about-item {
+        padding: var(--space-sm) var(--space-md);
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        transition: background 0.2s ease;
+      }
+
+      .skill-about-item:hover {
+        background: var(--surface);
+      }
+
+      .skill-about-item:nth-child(3n) {
+        border-right: none;
+      }
+      .skill-about-item:nth-last-child(-n + 3) {
+        border-bottom: none;
+      }
+
+      .skill-about-name {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .skill-about-level {
+        font-size: 12px;
+        color: var(--muted-2);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .skill-about-bar {
+        height: 2px;
+        background: var(--border);
+        border-radius: 2px;
+        margin-top: 0.4rem;
+        overflow: hidden;
+      }
+
+      .skill-about-bar-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      /* Currently learning */
+      .learning-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .learning-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-md);
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .learning-item:last-child {
+        border-bottom: none;
+      }
+
+      .learning-icon {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+        background: var(--surface);
+        margin-top: 0.2rem;
+      }
+
+      .learning-text h4 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+
+      .learning-text p {
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 900px) {
+        .about-hero {
+          padding: 0 var(--space-md);
+        }
+        .skills-about-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .skill-about-item:nth-child(3n) {
+          border-right: 1px solid var(--border);
+        }
+        .skill-about-item:nth-child(2n) {
+          border-right: none;
+        }
+        .skill-about-item:nth-last-child(-n + 3) {
+          border-bottom: 1px solid var(--border);
+        }
+        .skill-about-item:nth-last-child(-n + 2) {
+          border-bottom: none;
+        }
+        .education-row {
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+        .education-label {
+          min-width: unset;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .skills-about-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+
+    <nav>
+      <span class="nav-logo">D.</span>
+      <ul>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ── About Hero ──────────────────── -->
+    <header class="about-hero">
+      <div class="about-hero-inner">
+        <p class="hero-tag">About me</p>
+        <h1>Who I am.</h1>
+        <p class="about-intro">
+          A software development student who builds things to understand them —
+          not just to complete them.
+        </p>
+      </div>
+    </header>
+
+    <!-- ── Bio ────────────────────────── -->
+    <section id="bio">
+      <div class="section-label"><span>01</span> Background</div>
+      <div class="bio-block">
+        <p>
+          I'm Damien, a T Level student in Software Design and Development based
+          in the UK. I got into programming because I wanted to understand how
+          the software I used every day actually worked — and that curiosity
+          hasn't stopped since.
+        </p>
+        <p>
+          Most of what I know comes from building real projects, hitting
+          problems, and working through them. Dralix started as a way to learn
+          JavaScript properly — no tutorials, no frameworks, just me and the DOM
+          until it worked. That approach has shaped how I think about
+          development: understand the fundamentals first, then build on top.
+        </p>
+        <p>
+          I'm looking for an apprenticeship where I can contribute to a real
+          team, keep learning at pace, and work on problems that matter.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Education ──────────────────── -->
+    <section id="education">
+      <div class="section-label"><span>02</span> Education</div>
+      <div class="education-card">
+        <div class="education-card-header">
+          <h3>T Level — Software Design and Development</h3>
+          <span class="education-badge">In Progress</span>
+        </div>
+        <div class="education-card-body">
+          <div class="education-row">
+            <span class="education-label">Qualification</span>
+            <span class="education-value"
+              >T Level (equivalent to 3 A Levels)</span
+            >
+          </div>
+          <div class="education-row">
+            <span class="education-label">Subject</span>
+            <span class="education-value"
+              >Digital Production, Design and Development</span
+            >
+          </div>
+          <div class="education-row">
+            <span class="education-label">Duration</span>
+            <span class="education-value">2 years — completing 2026</span>
+          </div>
+          <div class="education-row">
+            <span class="education-label">Includes</span>
+            <span class="education-value">Industry Placement (315+ hours)</span>
+          </div>
+          <p class="education-desc">
+            The T Level covers software engineering principles, database design,
+            network fundamentals, and professional development practices.
+            Alongside the technical content, the course includes a significant
+            industry placement component — working within a real business to
+            apply and develop skills in a professional environment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ─────────────────────── -->
+    <section id="skills">
+      <div class="section-label"><span>03</span> Skills</div>
+      <div class="skills-about-grid">
+        <div class="skill-about-item">
+          <span class="skill-about-name">Python</span>
+          <span class="skill-about-level">Comfortable</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="skill-about-item">
+          <span class="skill-about-name">HTML &amp; CSS</span>
+          <span class="skill-about-level">Comfortable</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="skill-about-item">
+          <span class="skill-about-name">MySQL</span>
+          <span class="skill-about-level">Comfortable</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 70%"></div>
+          </div>
+        </div>
+        <div class="skill-about-item">
+          <span class="skill-about-name">Flask</span>
+          <span class="skill-about-level">Comfortable</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 65%"></div>
+          </div>
+        </div>
+        <div class="skill-about-item">
+          <span class="skill-about-name">JavaScript</span>
+          <span class="skill-about-level">In Progress</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 45%"></div>
+          </div>
+        </div>
+        <div class="skill-about-item">
+          <span class="skill-about-name">Git / GitHub</span>
+          <span class="skill-about-level">Comfortable</span>
+          <div class="skill-about-bar">
+            <div class="skill-about-bar-fill" style="width: 65%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Currently Learning ─────────── -->
+    <section id="learning">
+      <div class="section-label"><span>04</span> Currently Learning</div>
+      <div class="learning-list">
+        <div class="learning-item">
+          <div class="learning-icon">⚡</div>
+          <div class="learning-text">
+            <h4>JavaScript — deeper</h4>
+            <p>
+              Moving beyond the basics into async patterns, the event loop, and
+              how the browser actually works under the hood.
+            </p>
+          </div>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🗄️</div>
+          <div class="learning-text">
+            <h4>Deployment &amp; hosting</h4>
+            <p>
+              Learning how to take a project from local to live — exploring
+              hosting options, environment config, and CI basics.
+            </p>
+          </div>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🔧</div>
+          <div class="learning-text">
+            <h4>Software architecture</h4>
+            <p>
+              Reading more about how larger systems are structured — separation
+              of concerns, design patterns, and writing code that's easier to
+              maintain.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Damien Higgins</p>
+      <a
+        href="index.html"
+        style="
+          color: var(--muted-2);
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.2s ease;
+        "
+        onmouseover="this.style.color = 'var(--accent)'"
+        onmouseout="this.style.color = 'var(--muted-2)'"
+        >← Back to portfolio</a
+      >
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
