@@ -1,7 +1,8 @@
-/* ─────────────────────────────
-   Variables / Design System
-───────────────────────────── */
+/* ============================================================
+   DESIGN SYSTEM — Variables
+   ============================================================ */
 :root {
+  /* Colours */
   --bg: #0a0a0a;
   --surface: #0f0f0f;
   --surface-2: #141414;
@@ -14,25 +15,29 @@
   --accent-dim: rgba(200, 232, 63, 0.07);
   --accent-glow: rgba(200, 232, 63, 0.15);
 
+  /* Spacing */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 7rem;
 
+  /* Radii */
   --radius-sm: 3px;
   --radius-md: 6px;
 
+  /* Typography */
   --font-display: "Syne", sans-serif;
   --font-body: "Figtree", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
+  /* Layout */
   --max-width: 860px;
 }
 
-/* ─────────────────────────────
-   Reset
-───────────────────────────── */
+/* ============================================================
+   RESET
+   ============================================================ */
 *,
 *::before,
 *::after {
@@ -54,46 +59,87 @@ body {
   overflow-x: hidden;
 }
 
-/* ─────────────────────────────
-   Custom Cursor
-───────────────────────────── */
-.cursor {
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: fixed;
+/* ============================================================
+   SHARED DECORATIVE PATTERNS
+   Reused pseudo-elements kept in one place to avoid duplication.
+   ============================================================ */
+
+/* Dot-grid background (hero + about-hero) */
+#hero::before,
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.35;
   pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.15s ease,
-    height 0.15s ease,
-    opacity 0.2s ease;
-  mix-blend-mode: difference;
-  display: none;
 }
 
-body.has-hover .cursor {
-  display: block;
-}
-body.has-hover {
-  cursor: none;
-}
-body.has-hover *,
-body.has-hover *::before,
-body.has-hover *::after {
-  cursor: none !important;
-}
-
-.cursor.expanded {
-  width: 22px;
-  height: 22px;
+/* Accent radial glow (hero + about-hero) */
+#hero::after,
+.about-hero::after {
+  content: "";
+  position: absolute;
+  right: -5%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+  pointer-events: none;
 }
 
-/* ─────────────────────────────
-   Navigation
-───────────────────────────── */
+#hero::after {
+  top: 15%;
+}
+.about-hero::after {
+  top: 10%;
+  width: 400px;
+  height: 400px;
+}
+
+/* Accent tag — shared between .hero-tag and any leading eyebrow label */
+.hero-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-tag::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Pill/badge — shared between .project-tag and .education-badge */
+.project-tag,
+.education-badge {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(200, 232, 63, 0.12);
+}
+
+.education-badge {
+  font-size: 12px;
+} /* slight size override */
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 nav {
   position: fixed;
   inset: 0 0 auto 0;
@@ -136,9 +182,9 @@ nav a.active {
   color: var(--accent);
 }
 
-/* ─────────────────────────────
-   Hero
-───────────────────────────── */
+/* ============================================================
+   HERO  (index page)
+   ============================================================ */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -149,29 +195,6 @@ nav a.active {
   overflow: hidden;
 }
 
-#hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border-subtle) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-#hero::after {
-  content: "";
-  position: absolute;
-  top: 15%;
-  right: -5%;
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
-  pointer-events: none;
-}
-
 .hero-inner {
   max-width: var(--max-width);
   width: 100%;
@@ -179,26 +202,6 @@ nav a.active {
   position: relative;
   z-index: 1;
   padding: var(--space-xl) 0;
-}
-
-.hero-tag {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--space-sm);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.hero-tag::before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 1px;
-  background: var(--accent);
-  flex-shrink: 0;
 }
 
 h1 {
@@ -233,9 +236,11 @@ h1 {
   flex-wrap: wrap;
 }
 
-/* ─────────────────────────────
-   Buttons
-───────────────────────────── */
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+/* Shared base */
 .btn,
 .btn-ghost {
   display: inline-block;
@@ -249,30 +254,34 @@ h1 {
   transition: all 0.2s ease;
 }
 
+/* Filled */
 .btn {
   background: var(--accent);
   color: #000;
 }
+
 .btn:hover {
   background: #d4f044;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px var(--accent-glow);
 }
 
+/* Ghost / outline */
 .btn-ghost {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);
 }
+
 .btn-ghost:hover {
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-2px);
 }
 
-/* ─────────────────────────────
-   Sections
-───────────────────────────── */
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
 section {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -291,6 +300,7 @@ section {
   letter-spacing: -0.02em;
 }
 
+/* Mono eyebrow number */
 .section-label span:first-child {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -299,9 +309,9 @@ section {
   letter-spacing: 0.1em;
 }
 
-/* ─────────────────────────────
-   Projects
-───────────────────────────── */
+/* ============================================================
+   PROJECTS
+   ============================================================ */
 .project {
   padding: var(--space-md) 0;
   border-bottom: 1px solid var(--border-subtle);
@@ -327,15 +337,8 @@ section {
   letter-spacing: -0.02em;
 }
 
+/* .project-tag shares styles via the shared rule above */
 .project-tag {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  background: var(--accent-dim);
-  padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(200, 232, 63, 0.12);
   margin-top: 0.15rem;
 }
 
@@ -356,9 +359,7 @@ section {
   color: var(--muted);
 }
 
-/* ─────────────────────────────
-   Project Preview
-───────────────────────────── */
+/* --- Project preview chrome --- */
 .project-preview {
   margin: var(--space-sm) 0;
   border-radius: var(--radius-md);
@@ -396,12 +397,11 @@ section {
 .project-screenshot-sm:first-child {
   max-height: 160px;
 }
-
 .project-screenshot-sm:not(:last-child) {
   border-bottom: 1px solid var(--border);
 }
 
-/* Preview bar */
+/* Browser-style preview bar */
 .preview-bar {
   display: flex;
   align-items: center;
@@ -416,6 +416,7 @@ section {
   height: 8px;
   border-radius: 50%;
 }
+
 .preview-dot:nth-child(1) {
   background: #ff5f57;
 }
@@ -443,6 +444,7 @@ pre {
   font-family: var(--font-mono);
 }
 
+/* When code lives inside a preview panel, remove its own chrome */
 .project-preview pre {
   margin: 0;
   border-radius: 0;
@@ -458,9 +460,7 @@ pre code.hljs {
   background: var(--surface) !important;
 }
 
-/* ─────────────────────────────
-   Project Meta
-───────────────────────────── */
+/* --- Project meta row --- */
 .project-meta {
   display: flex;
   justify-content: space-between;
@@ -505,11 +505,6 @@ pre code.hljs {
   align-items: center;
 }
 
-.project-link-primary {
-  color: var(--accent) !important;
-  font-weight: 600;
-}
-
 .project-link {
   text-decoration: none;
   color: var(--text);
@@ -522,10 +517,14 @@ pre code.hljs {
 .project-link:hover {
   color: var(--accent);
 }
+.project-link-primary {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
 
-/* ─────────────────────────────
-   Skills
-───────────────────────────── */
+/* ============================================================
+   SKILLS  (index page)
+   ============================================================ */
 .skills-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -564,9 +563,9 @@ pre code.hljs {
   font-style: normal;
 }
 
-/* ─────────────────────────────
-   Contact
-───────────────────────────── */
+/* ============================================================
+   CONTACT
+   ============================================================ */
 .contact-block {
   display: flex;
   flex-direction: column;
@@ -603,9 +602,9 @@ pre code.hljs {
   color: var(--accent);
 }
 
-/* ─────────────────────────────
-   Footer
-───────────────────────────── */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 footer {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -617,9 +616,235 @@ footer {
   align-items: center;
 }
 
-/* ─────────────────────────────
-   Responsive
-───────────────────────────── */
+/* ============================================================
+   ABOUT PAGE — Hero
+   ============================================================ */
+.about-hero {
+  min-height: 40vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ::before / ::after handled by shared rules above */
+
+.about-hero-inner {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 8rem 0 3rem;
+}
+
+.about-hero-inner .hero-tag {
+  margin-bottom: var(--space-sm);
+}
+
+.about-hero-inner h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  margin-bottom: var(--space-sm);
+}
+
+.about-intro {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+/* ============================================================
+   ABOUT PAGE — Bio
+   ============================================================ */
+.bio-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.bio-block p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.85;
+  max-width: 640px;
+}
+
+/* ============================================================
+   ABOUT PAGE — Education card
+   ============================================================ */
+.education-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.education-card-header {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.education-card-header h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* .education-badge shares styles via the shared rule above */
+
+.education-card-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.education-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.education-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-2);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.education-value {
+  font-size: 17px;
+  color: var(--text);
+}
+
+.education-desc {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ============================================================
+   ABOUT PAGE — Skills grid
+   ============================================================ */
+.skills-about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.skill-about-item {
+  padding: var(--space-sm) var(--space-md);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: background 0.2s ease;
+}
+
+.skill-about-item:hover {
+  background: var(--surface);
+}
+.skill-about-item:nth-child(3n) {
+  border-right: none;
+}
+.skill-about-item:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.skill-about-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skill-about-level {
+  font-size: 12px;
+  color: var(--muted-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.skill-about-bar {
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 0.4rem;
+  overflow: hidden;
+}
+
+.skill-about-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   ABOUT PAGE — Currently learning
+   ============================================================ */
+.learning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.learning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.learning-item:last-child {
+  border-bottom: none;
+}
+
+.learning-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: var(--surface);
+  margin-top: 0.2rem;
+}
+
+.learning-text h4 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.learning-text p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   RESPONSIVE — 900px breakpoint
+   ============================================================ */
 @media (max-width: 900px) {
   nav {
     padding: var(--space-sm) var(--space-md);
@@ -633,6 +858,13 @@ footer {
   footer {
     padding: var(--space-sm) var(--space-md);
   }
+
+  /* About hero */
+  .about-hero {
+    padding: 0 var(--space-md);
+  }
+
+  /* Skills (index) — collapse to 1 column */
   .skills-grid {
     grid-template-columns: 1fr;
   }
@@ -642,17 +874,50 @@ footer {
   .skill-item:last-child {
     border-bottom: none;
   }
+
+  /* Skills (about) — collapse to 2 columns */
+  .skills-about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skill-about-item:nth-child(3n) {
+    border-right: 1px solid var(--border);
+  }
+  .skill-about-item:nth-child(2n) {
+    border-right: none;
+  }
+  .skill-about-item:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-about-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  /* Project meta */
   .project-meta {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* Contact */
   .contact-line {
     flex-direction: column;
     gap: 0.3rem;
     align-items: flex-start;
   }
+
+  /* Education */
+  .education-row {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .education-label {
+    min-width: unset;
+  }
 }
 
+/* ============================================================
+   RESPONSIVE — 600px breakpoint
+   ============================================================ */
 @media (max-width: 600px) {
   nav ul {
     gap: var(--space-sm);
@@ -660,10 +925,15 @@ footer {
   h1 {
     font-size: clamp(3rem, 12vw, 5rem);
   }
+
   .hero-ctas {
     flex-direction: column;
   }
   .project-header {
     flex-direction: column;
+  }
+
+  .skills-about-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
